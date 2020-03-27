@@ -44,3 +44,5 @@ out
 test-output
 atlassian-ide-plugin.xml
 .gradletasknamecache
+gradlew
+gradlew.bat
