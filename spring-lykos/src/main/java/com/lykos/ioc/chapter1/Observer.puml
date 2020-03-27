@@ -1,0 +1,12 @@
+@startuml
+
+class Subject
+class Observer
+Subject o-- Observer:1..*
+
+class Subject{
+    Observer [] observers
+}
+class Observer{
+}
+@enduml
