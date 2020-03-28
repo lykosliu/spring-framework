@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	   xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	   xsi:schemaLocation="http://www.springframework.org/schema/beans
+        https://www.springframework.org/schema/beans/spring-beans.xsd">
+
+	<bean id="subject" class="com.lykos.ioc.chapter1.Subject">
+		<property name="observers">
+			<list>
+				<ref bean="observer"/>
+			</list>
+		</property>
+	</bean>
+	<!--这里使用import导入其它xml配置信息 -->
+	<import resource="observer.xml"></import>
+</beans>
