@@ -1,6 +1,7 @@
 package com.lykos.ioc.chapter1;
 
 import org.springframework.context.ApplicationContext;
+import org.springframework.context.annotation.Bean;
 import org.springframework.context.support.ClassPathXmlApplicationContext;
 
 public class Chapter1Rocket {

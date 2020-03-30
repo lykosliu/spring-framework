@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	   xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	   xsi:schemaLocation="http://www.springframework.org/schema/beans
+        https://www.springframework.org/schema/beans/spring-beans.xsd" default-destroy-method="" default-init-method="">
+	<bean id="lifecycleBeanB" init-method="init" destroy-method="destroy" class="com.lykos.ioc.chapter2.LifecycleBeanB">
+		<property name="lifecycleBean" ref="lifecycleBean"></property>
+	</bean>
+<!--	<bean id="myBeanNameAware" class="com.lykos.ioc.chapter2.MyBeanNameAware"></bean>-->
+	<bean id="lifecycleBean" init-method="init" destroy-method="destroy" class="com.lykos.ioc.chapter2.LifecycleBean"></bean>
+	<bean id="myInitializingBean" class="com.lykos.ioc.chapter2.MyInitializingBean"></bean>
+	<bean id="myDisposableBean" class="com.lykos.ioc.chapter2.MyDisposableBean"></bean>
+</beans>

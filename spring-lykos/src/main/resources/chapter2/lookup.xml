@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	   xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	   xmlns:p="http://www.springframework.org/schema/p"
+	   xmlns:c="http://www.springframework.org/schema/c"
+	   xsi:schemaLocation="http://www.springframework.org/schema/beans
+        https://www.springframework.org/schema/beans/spring-beans.xsd">
+
+	<!-- 这里必须是scope="prototype" -->
+	<bean id="setter_to_lookup" scope="prototype" class="com.lykos.ioc.chapter2.SetterA" p:age="17" p:name="pName"/>
+	<bean id="lookup" class="com.lykos.ioc.chapter2.LookUp">
+		<!--lookup-method 定义后，每次getSetterA都会是一个新的对象-->
+		<lookup-method name="getSetterA" bean="setter_to_lookup"></lookup-method>
+	</bean>
+
+	<bean id="methodReplace" class="com.lykos.ioc.chapter2.MethodReplace">
+		<!-- 使用replaced-method替换原有的方法-->
+		<replaced-method name="say" replacer="myMethodReplacer"></replaced-method>
+	</bean>
+	<bean id="myMethodReplacer" class="com.lykos.ioc.chapter2.MyMethodReplacer"></bean>
+
+
+</beans>

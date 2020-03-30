@@ -37,7 +37,7 @@ import org.springframework.beans.factory.Aware;
  * @author Rob Harrop
  * @author Chris Beams
  * @since 2.0
- * @see NotificationPublisher
+ * @see NotificationPublisherResourceLoaderAware
  */
 public interface NotificationPublisherAware extends Aware {
 

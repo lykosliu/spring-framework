@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	   xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	   xmlns:p="http://www.springframework.org/schema/p"
+	   xmlns:c="http://www.springframework.org/schema/c"
+	   xsi:schemaLocation="http://www.springframework.org/schema/beans
+        https://www.springframework.org/schema/beans/spring-beans.xsd">
+	<bean id="constructA" class="com.lykos.ioc.chapter2.ConstructA">
+		<!--此处与顺序无关，也不需要指定名称和类型-->
+		<constructor-arg ref="constructB"/>
+		<constructor-arg ref="constructC"/>
+	</bean>
+	<bean id="constructB" class="com.lykos.ioc.chapter2.ConstructB"/>
+	<bean id="constructC" class="com.lykos.ioc.chapter2.ConstructC"/>
+    <!--	不用指定下标，默认就是顺序就是我们配置顺序-->
+	<bean id="constructD" class="com.lykos.ioc.chapter2.ConstructD">
+		<constructor-arg value="2"/>
+		<constructor-arg value="this name"/>
+	</bean>
+
+	<!--	使用index指定下标，此时与我们配置的顺序无关，顺序可以随变-->
+	<bean id="constructD_index" class="com.lykos.ioc.chapter2.ConstructD">
+		<constructor-arg index="1" value="this name 1"/>
+		<constructor-arg index="0" value="2"/>
+	</bean>
+
+	<!--	使用type，此时与我们配置的顺序无关，顺序可以随变-->
+	<bean id="constructD_type" class="com.lykos.ioc.chapter2.ConstructD">
+		<constructor-arg type="java.lang.String" value="this name 1 type"/>
+		<constructor-arg type="int" value="112"/>
+	</bean>
+
+	<!--	使用name，此时与我们配置的顺序无关，顺序可以随变-->
+	<bean id="constructD_name" class="com.lykos.ioc.chapter2.ConstructD">
+		<constructor-arg name="name" value="this name 1 name"/>
+		<constructor-arg name="age" value="112"/>
+	</bean>
+	<bean id="setterC" depends-on="constructD_c_name" class="com.lykos.ioc.chapter2.SetterA" p:age="19" p:name="dependName"/>
+
+	<!--	使用c:{}，此时与我们配置的顺序无关，顺序可以随变-->
+	<bean id="constructD_c_name" class="com.lykos.ioc.chapter2.ConstructD" c:name="cName" c:age="123"/>
+
+	<bean id="setterA" class="com.lykos.ioc.chapter2.SetterA">
+		<property name="age" value="18"></property>
+		<property name="name" value="lykos"></property>
+	</bean>
+
+	<bean id="setterB" class="com.lykos.ioc.chapter2.SetterA" p:age="17" p:name="pName"/>
+
+	<bean id="setterD" lazy-init="true" class="com.lykos.ioc.chapter2.SetterA"/>
+	<import resource="lazy.xml"></import>
+	<import resource="no_lazy.xml"></import>
+	<import resource="lookup.xml"></import>
+</beans>

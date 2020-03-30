@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	   xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	   xsi:schemaLocation="http://www.springframework.org/schema/beans
+        https://www.springframework.org/schema/beans/spring-beans.xsd">
+<!--	name 可以定义多个名字-->
+	<bean id="observer" name="observer_a,observer_b observer_c" class="com.lykos.ioc.chapter2.Observer"/>
+<!--	也可以用alias创建别名-->
+	<alias name="observer_c" alias="observer_d"/>
+	<alias name="observer_c" alias="observer_e"/>
+
+	<!--	使用无参构造方法，创建-->
+	<bean id="observer_constructor" class="com.lykos.ioc.chapter2.Observer">
+	</bean>
+	<!--	使用有参构造方法：属性名创建-->
+	<bean id="observer_constructor_arg" class="com.lykos.ioc.chapter2.Observer">
+		<constructor-arg name="name" value="observer_constructor_arg_name"/>
+	</bean>
+	<!--	使用有参构造方法：下标创建-->
+	<bean id="observer_constructor_arg_index" class="com.lykos.ioc.chapter2.Observer">
+		<constructor-arg index="0" value="observer_constructor_arg_name_index"/>
+	</bean>
+
+	<!--	静态工场方法创建-->
+	<bean id="observer_from_static_factory" class="com.lykos.ioc.chapter2.ObserverStaticFactory" factory-method="createObserver"></bean>
+	<!--	非静态工场方法创建-->
+	<bean id="observerFactory" class="com.lykos.ioc.chapter2.ObserverNonStaticFactory"></bean>
+	<bean id="observer_from_non_static_factory_b" factory-bean="observerFactory" factory-method="createObserver">
+	</bean>
+</beans>
