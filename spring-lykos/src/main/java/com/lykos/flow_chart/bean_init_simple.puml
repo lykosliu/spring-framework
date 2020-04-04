@@ -1,0 +1,7 @@
+@startuml
+Bean -> Bean:construct
+BeanPostProcessor -> BeanPostProcessor:postProcessBeforeInitialization
+InitializingBean -> InitializingBean:afterPropertiesSet
+Bean -> Bean:initMeghod
+BeanPostProcessor -> BeanPostProcessor:postProcessBeforeInitialization
+@enduml

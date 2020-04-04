@@ -16,7 +16,10 @@ public class Chapter2Rocket {
 		//这里的构造参数也支持设置多个文件
 		ConfigurableApplicationContext ac = new ClassPathXmlApplicationContext("chapter2/lifecycle.xml");
 		ac.registerShutdownHook();
-		LifecycleBean lifecycleBean = ac.getBean("lifecycleBean",LifecycleBean.class);
+		ChildBean childBean = ac.getBean("childBean",ChildBean.class);
+		ChildBean childBean2 = ac.getBean("childBean2",ChildBean.class);
+		System.out.println(childBean.getName()+childBean.getDesc()+childBean.getAge());
+		System.out.println(childBean2.getName()+childBean2.getDesc()+childBean2.getAge());
 
 	}
 

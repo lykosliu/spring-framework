@@ -1,0 +1,7 @@
+BeanPostProcess注册顺序
+@startuml
+(*)  --> "PriorityOrdered"
+--> "Ordered"
+--> "NoOrdered"
+-->(*)
+@enduml

@@ -6,7 +6,7 @@ import org.springframework.context.LifecycleProcessor;
 import org.springframework.context.SmartLifecycle;
 
 public class LifecycleBeanB implements SmartLifecycle, BeanNameAware {
-	private LifecycleBean lifecycleBean;
+	private String name;
 	public LifecycleBeanB(){
 //		System.out.println("construct LifecycleBeanB");
 	}
@@ -37,12 +37,12 @@ public class LifecycleBeanB implements SmartLifecycle, BeanNameAware {
 		System.out.println(name);
 	}
 
-	public void setLifecycleBean(LifecycleBean lifecycleBean) {
-		this.lifecycleBean = lifecycleBean;
+
+	public String getName() {
+		return name;
 	}
 
-//	@Override
-//	public int getPhase(){
-//		return 0;
-//	}
+	public void setName(String name) {
+		this.name = name;
+	}
 }

@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	   xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	   xsi:schemaLocation="http://www.springframework.org/schema/beans
+        https://www.springframework.org/schema/beans/spring-beans.xsd">
+	<bean id="myBeanPostProcessor" class="com.lykos.ioc.chapter3.MyBeanPostProcessor"></bean>
+	<bean id="myBeanFactoryPostProcessor" class="com.lykos.ioc.chapter3.MyBeanFactoryPostProcessor"></bean>
+<!--	<bean class="org.springframework.beans.factory.config.PropertyPlaceholderConfigurer">-->
+<!--		&lt;!&ndash; 指定配置文件地址&ndash;&gt;-->
+<!--		<property name="locations">-->
+<!--			<value>classpath:property/chapter3.properties</value>-->
+<!--		</property>-->
+<!--&lt;!&ndash;		0 从不判断system属性&ndash;&gt;-->
+<!--&lt;!&ndash;		1 如果提供的属性没有，取system属性&ndash;&gt;-->
+<!--&lt;!&ndash;		2 优先取system属性，如果没有则取提供的属性&ndash;&gt;-->
+<!--		<property name="systemPropertiesMode" value="2"></property>-->
+<!--	</bean>  -->
+
+<!--	<bean class="org.springframework.beans.factory.config.PropertyOverrideConfigurer">-->
+<!--		&lt;!&ndash; 指定配置文件地址&ndash;&gt;-->
+<!--		<property name="locations">-->
+<!--			<value>classpath:property/chapter3.properties</value>-->
+<!--		</property>-->
+<!--	</bean>-->
+
+<!--	<bean class="org.springframework.context.support.PropertySourcesPlaceholderConfigurer">-->
+<!--		&lt;!&ndash; 指定配置文件地址&ndash;&gt;-->
+<!--		<property name="locations">-->
+<!--			<value>classpath:property/chapter3.properties</value>-->
+<!--		</property>-->
+<!--		&lt;!&ndash;本地配置优先，默认是false&ndash;&gt;-->
+<!--		<property name="localOverride" value="true"></property>-->
+<!--	</bean>-->
+	<import resource="../pojo/pojo_bean.xml"></import>
+</beans>

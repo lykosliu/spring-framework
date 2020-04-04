@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	   xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	   xmlns:p="http://www.springframework.org/schema/p"
+	   xmlns:c="http://www.springframework.org/schema/c"
+	   xsi:schemaLocation="http://www.springframework.org/schema/beans
+        https://www.springframework.org/schema/beans/spring-beans.xsd">
+	<bean id="person" class="com.lykos.ioc.pojo.Person" p:sex="男" init-method="init">
+		<property name="name" value="lykos"></property>
+		<property name="age" value="18"></property>
+	</bean>
+<!--	<bean id="house" class="com.lykos.ioc.pojo.House">-->
+<!--		<property name="person" ref="personByFactoryBean"></property>-->
+<!--	</bean>-->
+	<bean id="personByFactoryBean" init-method="initM"  primary="true"  class="com.lykos.factory.PersonFactoryBean"></bean>
+</beans>

@@ -3,8 +3,26 @@
 	   xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
 	   xsi:schemaLocation="http://www.springframework.org/schema/beans
         https://www.springframework.org/schema/beans/spring-beans.xsd" default-destroy-method="" default-init-method="">
-	<bean id="lifecycleBeanB" init-method="init" destroy-method="destroy" class="com.lykos.ioc.chapter2.LifecycleBeanB">
-		<property name="lifecycleBean" ref="lifecycleBean"></property>
+	<bean id="parentBean" class="com.lykos.ioc.chapter2.ParentBean">
+		<property name="name" value="parentBean"></property>
+		<property name="age" value="10"></property>
+	</bean>
+
+	<bean id="parentBean2" abstract="true">
+		<property name="name" value="parentBean2"></property>
+		<property name="age" value="102"></property>
+	</bean>
+
+	<bean id="childBean" parent="parentBean2" class="com.lykos.ioc.chapter2.ChildBean">
+		<property name="desc" value="this is child"></property>
+	</bean>
+
+	<bean id="childBean2" parent="parentBean2" class="com.lykos.ioc.chapter2.ChildBean">
+		<property name="name" value="coverParentName"></property>
+		<property name="desc" value="this is child"></property>
+	</bean>
+
+	<bean id="lifecycleBeanB"  init-method="init" destroy-method="destroy" class="com.lykos.ioc.chapter2.LifecycleBeanB">
 	</bean>
 <!--	<bean id="myBeanNameAware" class="com.lykos.ioc.chapter2.MyBeanNameAware"></bean>-->
 	<bean id="lifecycleBean" init-method="init" destroy-method="destroy" class="com.lykos.ioc.chapter2.LifecycleBean"></bean>
