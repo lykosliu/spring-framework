@@ -1,6 +1,5 @@
 package com.lykos.ioc.chapter3;
 
-import com.lykos.ioc.pojo.Person;
 import org.springframework.beans.BeansException;
 import org.springframework.beans.factory.config.BeanPostProcessor;
 
