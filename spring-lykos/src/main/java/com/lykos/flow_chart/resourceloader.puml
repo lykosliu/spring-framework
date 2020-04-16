@@ -1,0 +1,66 @@
+@startuml
+abstract class InputStream
+interface ResourceLoader
+interface ResourcePatternResolver
+class DefaultResourceLoader
+abstract class AbstractApplicationContext
+class PathMatchingResourcePatternResolver
+interface ApplicationContext
+Resource <-- ResourceLoader
+InputStream <-- InputStreamSource
+ResourceLoader <|.. DefaultResourceLoader
+DefaultResourceLoader <|-- AbstractApplicationContext
+ResourcePatternResolver <-- AbstractApplicationContext
+ApplicationContext <|-- AbstractApplicationContext
+ResourcePatternResolver <|-- ApplicationContext
+ResourcePatternResolver <|-- PathMatchingResourcePatternResolver
+
+interface InputStreamSource{
+     getInputStream() throws IOException
+}
+
+interface Resource extends InputStreamSource {
+	boolean exists()
+	default boolean isReadable()
+	default boolean isOpen()
+	default boolean isFile()
+	URL getURL() throws IOException
+	URI getURI() throws IOException
+	File getFile() throws IOException
+	default ReadableByteChannel readableChannel() throws IOException
+	long contentLength() throws IOException;
+	long lastModified() throws IOException;
+	Resource createRelative(String relativePath) throws IOException;
+	String getFilename();
+	String getDescription();
+
+}
+
+interface ResourceLoader {
+	String CLASSPATH_URL_PREFIX = ResourceUtils.CLASSPATH_URL_PREFIX
+	Resource getResource(String location)
+	ClassLoader getClassLoader()
+}
+
+interface ResourcePatternResolver extends ResourceLoader {
+	String CLASSPATH_ALL_URL_PREFIX = "classpath*:"
+	Resource[] getResources(String locationPattern) throws IOException
+
+}
+
+abstract AbstractApplicationContext{
+private ResourcePatternResolver resourcePatternResolver;
+}
+
+
+class DefaultResourceLoader {
+	private ClassLoader classLoader
+	private final Set<ProtocolResolver> protocolResolvers = new LinkedHashSet<>(4)
+	private final Map<Class<?>, Map<Resource, ?>> resourceCaches = new ConcurrentHashMap<>(4)
+	public <T> Map<Resource, T> getResourceCache(Class<T> valueType)
+	public Resource getResource(String location)
+	protected Resource getResourceByPath(String path)
+	protected static class ClassPathContextResource
+}
+
+@enduml

@@ -1,0 +1,60 @@
+@startuml
+interface ApplicationEventMulticaster
+interface EventListener
+interface ApplicationListener
+abstract AbstractApplicationEventMulticaster
+class SimpleApplicationEventMulticaster
+interface ApplicationEventPublisher
+class EventObject
+abstract class ApplicationEvent
+interface ApplicationContext
+class AbstractApplicationContext
+
+EventListener <|-- ApplicationListener
+ApplicationEventMulticaster <|.. AbstractApplicationEventMulticaster
+AbstractApplicationEventMulticaster <|-- SimpleApplicationEventMulticaster
+ApplicationListener o-- ApplicationEventMulticaster
+EventObject <|-- ApplicationEvent
+ApplicationEvent <.. ApplicationEventPublisher
+ApplicationEventPublisher <-- ApplicationContext
+ApplicationContext <.. AbstractApplicationContext
+ApplicationEventMulticaster <-- AbstractApplicationContext
+
+
+interface ApplicationEventMulticaster {
+	void addApplicationListener(ApplicationListener<?> listener)
+	void addApplicationListenerBean(String listenerBeanName)
+	void removeApplicationListener(ApplicationListener<?> listener)
+	void removeApplicationListenerBean(String listenerBeanName)
+	void removeAllListeners()
+	void multicastEvent(ApplicationEvent event)
+	void multicastEvent(ApplicationEvent event, @Nullable ResolvableType eventType)
+
+}
+abstract AbstractApplicationEventMulticaster{
+    private final ListenerRetriever defaultRetriever = new ListenerRetriever(false)
+    final Map<ListenerCacheKey, ListenerRetriever> retrieverCache = new ConcurrentHashMap<>(64)
+    private ClassLoader beanClassLoader
+    private BeanFactory beanFactory
+    private Object retrievalMutex = this.defaultRetriever
+
+}
+
+class SimpleApplicationEventMulticaster{
+	private Executor taskExecutor
+	private ErrorHandler errorHandler
+}
+
+interface ApplicationListener{
+	void onApplicationEvent(E event)
+}
+
+interface ApplicationEventPublisher {
+	default void publishEvent(ApplicationEvent event)
+	void publishEvent(Object event)
+}
+class AbstractApplicationContext{
+    private ApplicationEventMulticaster applicationEventMulticaster
+    public void publishEvent(ApplicationEvent event)
+}
+@enduml

@@ -1,0 +1,75 @@
+@startuml
+
+
+interface PropertyResolver
+interface Environment
+interface ConfigurableEnvironment
+abstract class AbstractEnvironment
+class StandardEnvironment
+interface PropertySources
+abstract class PropertySource
+class MutablePropertySources
+interface Iterable
+
+PropertyResolver <|-- Environment
+Environment <|-- ConfigurableEnvironment
+ConfigurableEnvironment <|.. AbstractEnvironment
+AbstractEnvironment <|-- StandardEnvironment
+PropertySources <|.. MutablePropertySources
+MutablePropertySources <-- ConfigurableEnvironment : has
+PropertySource <-- PropertySources : has
+Iterable <|-- PropertySources
+interface PropertyResolver {
+	boolean containsProperty(String key)
+	String getProperty(String key)
+	String getProperty(String key, String defaultValue)
+	<T> T getProperty(String key, Class<T> targetType)
+	<T> T getProperty(String key, Class<T> targetType, T defaultValue)
+	String getRequiredProperty(String key) throws IllegalStateException
+	<T> T getRequiredProperty(String key, Class<T> targetType) throws IllegalStateException
+	String resolvePlaceholders(String text)
+	String resolveRequiredPlaceholders(String text) throws IllegalArgumentException
+}
+
+interface Environment{
+	String[] getActiveProfiles()
+	String[] getDefaultProfiles()
+	boolean acceptsProfiles(String... profiles)
+	boolean acceptsProfiles(Profiles profiles)
+}
+
+class StandardEnvironment{
+	public static final String SYSTEM_ENVIRONMENT_PROPERTY_SOURCE_NAME = "systemEnvironment"
+	public static final String SYSTEM_PROPERTIES_PROPERTY_SOURCE_NAME = "systemProperties"
+}
+
+interface ConfigurableEnvironment {
+	void setActiveProfiles(String... profiles)
+	void addActiveProfile(String profile)
+	void setDefaultProfiles(String... profiles)
+	MutablePropertySources getPropertySources()
+	Map<String, Object> getSystemProperties()
+	Map<String, Object> getSystemEnvironment()
+	void merge(ConfigurableEnvironment parent)
+
+}
+class AbstractEnvironment  {
+	public static final String IGNORE_GETENV_PROPERTY_NAME = "spring.getenv.ignore"
+	public static final String ACTIVE_PROFILES_PROPERTY_NAME = "spring.profiles.active"
+	public static final String DEFAULT_PROFILES_PROPERTY_NAME = "spring.profiles.default"
+	protected static final String RESERVED_DEFAULT_PROFILE_NAME = "default"
+	private final Set<String> activeProfiles = new LinkedHashSet<>()
+	private final Set<String> defaultProfiles = new LinkedHashSet<>(getReservedDefaultProfiles())
+	private final MutablePropertySources propertySources = new MutablePropertySources()
+	private final ConfigurablePropertyResolver propertyResolver = new PropertySourcesPropertyResolver(this.propertySources)
+	protected void customizePropertySources(MutablePropertySources propertySources)
+}
+
+interface PropertySources {
+	default Stream<PropertySource<?>> stream()
+	boolean contains(String name)
+	PropertySource<?> get(String name);
+}
+
+
+@enduml
